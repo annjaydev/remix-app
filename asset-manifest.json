@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5f53c31e.css",
-    "main.js": "/static/js/main.80fcc0ec.js",
+    "main.js": "/static/js/main.3714249e.js",
     "static/js/787.0c3f432a.chunk.js": "/static/js/787.0c3f432a.chunk.js",
     "static/media/Inconsolata-ExpandedBold.woff2": "/static/media/Inconsolata-ExpandedBold.221924abe2b532ed6c14.woff2",
     "static/media/Inconsolata-ExpandedRegular.woff2": "/static/media/Inconsolata-ExpandedRegular.86aa641efb4638d451c6.woff2",
@@ -9,11 +9,11 @@
     "static/media/Inconsolata-Regular.woff2": "/static/media/Inconsolata-Regular.b89ff7c959f9ff7c8a8b.woff2",
     "index.html": "/index.html",
     "main.5f53c31e.css.map": "/static/css/main.5f53c31e.css.map",
-    "main.80fcc0ec.js.map": "/static/js/main.80fcc0ec.js.map",
+    "main.3714249e.js.map": "/static/js/main.3714249e.js.map",
     "787.0c3f432a.chunk.js.map": "/static/js/787.0c3f432a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5f53c31e.css",
-    "static/js/main.80fcc0ec.js"
+    "static/js/main.3714249e.js"
   ]
 }

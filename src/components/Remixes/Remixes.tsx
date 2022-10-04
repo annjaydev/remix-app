@@ -4,8 +4,8 @@ import { Box, Button } from '@mui/material';
 
 import AbsoluteLoading from '@/shared/ui/AbsoluteLoading/AbsoluteLoading';
 import { GET_REMIXES } from '@/graphql/queries';
-import { RemixForm } from '../RemixForm/RemixForm';
-import Table from '../Table/Table';
+import { RemixForm } from '../RemixForm';
+import { Table } from '../Table';
 import styles from './styles';
 
 const Remixes = () => {

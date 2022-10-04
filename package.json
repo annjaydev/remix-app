@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "homepage": "http://annjaydev.github.io/",
+  "homepage": "http://annjaydev.github.io/remix-app",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -58,7 +58,7 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "types": "graphql-codegen",
     "prepare": "husky install",
-    "predeploy": "yarn run react-app-rewired build",
+    "predeploy": "yarn run env-cmd -e DEV react-app-rewired build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {

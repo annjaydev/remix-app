@@ -17,7 +17,7 @@ import { columns, dataColumns } from '@/helpers/constants';
 import styles from './styles';
 import { IRemixModel } from '@/graphql/types/_server';
 import DeleteModal from '../DeleteModal/DeleteModal';
-import { RemixForm } from '../RemixForm/RemixForm';
+import { RemixForm } from '../RemixForm';
 
 const Table: FC<RemixTableProps> = ({ remixes }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);

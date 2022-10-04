@@ -1,15 +1,17 @@
 import { FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FetchResult, useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -28,15 +30,11 @@ import {
   trackLengthFieldValidation
 } from './validation';
 import styles from './styles';
-import { remixesGenres, successCreateMessage } from '@/helpers/constants';
+import { remixesGenres, successCreateMessage, successUpdateMessage } from '@/helpers/constants';
 
-export const RemixForm: FC<RemixFormProps> = ({
-  remixes,
-  setOpen,
-  currentRemix,
-  isUpdate = false
-}) => {
+const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdate = false }) => {
   const {
+    control,
     register,
     formState: { dirtyFields, errors },
     handleSubmit
@@ -71,7 +69,11 @@ export const RemixForm: FC<RemixFormProps> = ({
       .then((res) => {
         if (res.data) {
           remixes.refetch();
-          enqueueSnackbar(successCreateMessage, { variant: 'success' });
+
+          const message = isUpdate ? successUpdateMessage : successCreateMessage;
+          enqueueSnackbar(message, {
+            variant: 'success'
+          });
         }
       })
       .catch((err) => enqueueSnackbar(err.errors[0].message, { variant: 'error' }))
@@ -79,7 +81,7 @@ export const RemixForm: FC<RemixFormProps> = ({
   };
 
   const handleCreateRemix = (data: IRemixCreateDto): void => {
-    const mutationData = { ...data, isStore: true };
+    const mutationData = { ...data, isStore: data.isStore ?? false };
     const pendingResults = createRemix({ variables: { remixValues: mutationData } });
 
     handleMutationResponse(pendingResults);
@@ -172,6 +174,17 @@ export const RemixForm: FC<RemixFormProps> = ({
             helperText={errors?.description?.message ?? ' '}
             {...register('description', descriptionFieldValidation)}
           />
+
+          <FormControlLabel
+            label="Display the remix in the common list"
+            control={
+              <Controller
+                name="isStore"
+                control={control}
+                render={({ field }) => <Checkbox {...field} defaultChecked={isUpdate} />}
+              />
+            }
+          />
         </form>
       </DialogContent>
 
@@ -187,3 +200,5 @@ export const RemixForm: FC<RemixFormProps> = ({
     </Dialog>
   );
 };
+
+export default RemixForm;

@@ -45,7 +45,7 @@ const styles = {
     }
   },
   filler: {
-    height: '80px',
+    height: '60px',
     overflow: 'hidden',
     '@media screen and (max-width: 960px)': {
       height: '50px'

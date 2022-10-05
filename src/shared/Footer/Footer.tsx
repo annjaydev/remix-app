@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYearMemoized = useMemo(() => getCurrentYear(), []);
   return (
     <footer>
-      <Box sx={styles.footer}>© {currentYearMemoized} Test App</Box>
+      <Box sx={styles.footer}>© {currentYearMemoized} Enjoy the sound</Box>
     </footer>
   );
 };

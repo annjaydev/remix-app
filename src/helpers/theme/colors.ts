@@ -8,8 +8,8 @@ const colors = {
     inverted: '#fff'
   },
   border: {
-    main: '#ddd',
-    light: '#eeeeee',
+    main: '#727272',
+    light: '#BEBEBE',
     inverted: '#777'
   },
   grey: {
@@ -23,7 +23,7 @@ const colors = {
     black: '#000'
   },
   background: {
-    default: '#F1F1F1',
+    default: '#EDEDED',
     paper: '#ffffff'
   },
   background1: '#232323',

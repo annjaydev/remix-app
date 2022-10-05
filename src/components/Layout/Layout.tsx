@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
-import Header from '@/shared/Header/Header';
-import Footer from '@/shared/Footer/Footer';
 import styles from './styles';
+import { Footer, Header } from '@/shared';
 
 const Layout = () => {
   return (

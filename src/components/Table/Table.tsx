@@ -7,7 +7,8 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Tooltip
+  TablePagination,
+  IconButton
 } from '@mui/material';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -19,13 +20,29 @@ import { IRemixModel } from '@/graphql/types/_server';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import { RemixForm } from '../RemixForm';
 
-const Table: FC<RemixTableProps> = ({ remixes }) => {
+const Table: FC<RemixTableProps> = (props) => {
+  const { remixes, page, setPage, rowsPerPage, setRowsPerPage } = props;
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isUpdateFormOpen, setIsUpdateFormOpen] = useState<boolean>(false);
 
   const [currentRemix, setCurrentRemix] = useState<IRemixModel | undefined>(undefined);
 
-  const remixesData: [IRemixModel] = remixes.data.remixes.items;
+  const {
+    items,
+    meta: { total }
+  } = remixes.data.remixes;
+
+  const remixesData: [IRemixModel] = items;
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleDeleteRemix = (remix: IRemixModel): void => {
     setIsDeleteModalOpen(true);
@@ -50,15 +67,15 @@ const Table: FC<RemixTableProps> = ({ remixes }) => {
       })}
 
       <TableCell onClick={() => handleUpdateRemix(data)}>
-        <Tooltip title="Edit Remix">
+        <IconButton color="primary">
           <AutoFixHighIcon sx={styles.actionIcon} />
-        </Tooltip>
+        </IconButton>
       </TableCell>
 
       <TableCell onClick={() => handleDeleteRemix(data)}>
-        <Tooltip title="Delete Remix">
+        <IconButton color="primary">
           <ClearIcon sx={styles.actionIcon} />
-        </Tooltip>
+        </IconButton>
       </TableCell>
     </TableRow>
   );
@@ -79,6 +96,16 @@ const Table: FC<RemixTableProps> = ({ remixes }) => {
           <TableBody>{remixesData.map((remix) => getTableRow(remix))}</TableBody>
         </MuiTable>
       </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 15]}
+        count={total}
+        labelRowsPerPage="Remixes per page"
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
 
       {isDeleteModalOpen && (
         <DeleteModal id={currentRemix?.id} setOpen={setIsDeleteModalOpen} remixes={remixes} />

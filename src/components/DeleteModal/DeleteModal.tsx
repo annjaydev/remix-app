@@ -18,14 +18,17 @@ const DeleteModal: FC<DeleteModalProps> = ({ id, remixes, setOpen }) => {
         if (res.data) {
           remixes.refetch();
           enqueueSnackbar(successDeleteMessage, { variant: 'success' });
+          deletedRemix.client.resetStore();
         }
       })
       .catch((err) => enqueueSnackbar(err.errors[0].message, { variant: 'error' }))
       .finally(() => setOpen(false));
   };
 
+  const handleCloseModal = () => setOpen(false);
+
   return (
-    <Modal open>
+    <Modal open onClose={handleCloseModal}>
       <Box sx={{ ...styles.modal }}>
         <Typography variant="h5" sx={{ mb: 1 }}>
           Delete Remix
@@ -40,7 +43,7 @@ const DeleteModal: FC<DeleteModalProps> = ({ id, remixes, setOpen }) => {
             {deletedRemix.loading ? 'Wait...' : 'Delete'}
           </Button>
 
-          <Button sx={{ ...styles.actionButton }} onClick={() => setOpen(false)}>
+          <Button sx={{ ...styles.actionButton }} onClick={handleCloseModal}>
             Cancel
           </Button>
         </Grid>

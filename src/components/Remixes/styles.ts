@@ -10,6 +10,12 @@ const styles = {
   },
   page: {
     px: 6
+  },
+  sortButton: {
+    border: `1px solid ${colors.border.light}`,
+    fontSize: 20,
+    ml: 3,
+    width: 170
   }
 };
 

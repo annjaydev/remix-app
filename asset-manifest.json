@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/remix-app/static/css/main.ccb35cc2.css",
-    "main.js": "/remix-app/static/js/main.5ed168f5.js",
+    "main.js": "/remix-app/static/js/main.a6c3a9cb.js",
     "static/js/787.0c3f432a.chunk.js": "/remix-app/static/js/787.0c3f432a.chunk.js",
     "static/media/Inconsolata-ExpandedBold.woff2": "/remix-app/static/media/Inconsolata-ExpandedBold.221924abe2b532ed6c14.woff2",
     "static/media/Inconsolata-ExpandedRegular.woff2": "/remix-app/static/media/Inconsolata-ExpandedRegular.86aa641efb4638d451c6.woff2",
@@ -9,11 +9,11 @@
     "static/media/Inconsolata-Regular.woff2": "/remix-app/static/media/Inconsolata-Regular.b89ff7c959f9ff7c8a8b.woff2",
     "index.html": "/remix-app/index.html",
     "main.ccb35cc2.css.map": "/remix-app/static/css/main.ccb35cc2.css.map",
-    "main.5ed168f5.js.map": "/remix-app/static/js/main.5ed168f5.js.map",
+    "main.a6c3a9cb.js.map": "/remix-app/static/js/main.a6c3a9cb.js.map",
     "787.0c3f432a.chunk.js.map": "/remix-app/static/js/787.0c3f432a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ccb35cc2.css",
-    "static/js/main.5ed168f5.js"
+    "static/js/main.a6c3a9cb.js"
   ]
 }

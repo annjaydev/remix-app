@@ -32,7 +32,12 @@ import {
 import styles from './styles';
 import { remixesGenres, successCreateMessage, successUpdateMessage } from '@/helpers/constants';
 
-const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdate = false }) => {
+const RemixForm: FC<RemixFormProps> = ({
+  remixes,
+  handleCloseForm,
+  currentRemix,
+  isUpdate = false
+}) => {
   const {
     control,
     register,
@@ -74,10 +79,12 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
           enqueueSnackbar(message, {
             variant: 'success'
           });
+
+          (isUpdate ? updatedRemix : createdRemix).client.resetStore();
         }
       })
       .catch((err) => enqueueSnackbar(err.errors[0].message, { variant: 'error' }))
-      .finally(() => setOpen(false));
+      .finally(handleCloseForm);
   };
 
   const handleCreateRemix = (data: IRemixCreateDto): void => {
@@ -99,7 +106,7 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
   };
 
   return (
-    <Dialog open>
+    <Dialog open onClose={handleCloseForm}>
       <DialogTitle>
         <Typography variant="h5">{formTitle}</Typography>
       </DialogTitle>
@@ -131,7 +138,7 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
           <FormControl fullWidth>
             <InputLabel>Genre</InputLabel>
             <Select
-              defaultValue={GenreTypeEnum.Electronic}
+              defaultValue={currentRemix?.genre ?? GenreTypeEnum.Electronic}
               fullWidth
               label="Genre"
               sx={{ mb: 3 }}
@@ -189,7 +196,7 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={() => setOpen(false)} sx={{ ...styles.actionButton }}>
+        <Button onClick={handleCloseForm} sx={{ ...styles.actionButton }}>
           Cancel
         </Button>
 

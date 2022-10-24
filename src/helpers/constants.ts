@@ -1,4 +1,5 @@
-import { GenreTypeEnum } from '@/graphql/types/_server';
+import { GenreTypeEnum, SortDirectionEnum } from '@/graphql/types/_server';
+import { ISortColumns } from './types';
 
 export const dataColumns = [
   { value: 'name', title: 'Name', width: '15%' },
@@ -16,6 +17,16 @@ export const actionColumns = [
 
 export const columns = [...dataColumns, ...actionColumns];
 
+export const rowsPerPageSizes = [5, 10, 15];
+
+export const sortingFields = [
+  { value: 'authorEmail', title: 'Author Email' },
+  { value: 'description', title: 'Description' },
+  { value: 'name', title: 'Name' },
+  { value: 'price', title: 'Price' },
+  { value: 'trackLength', title: 'Track Length' }
+];
+
 export const emailPattern =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -23,6 +34,19 @@ export const remixesGenres = (Object.keys(GenreTypeEnum) as (keyof typeof GenreT
   .sort()
   .map((key) => GenreTypeEnum[key]);
 
+export const sortDirections = (
+  Object.keys(SortDirectionEnum) as (keyof typeof SortDirectionEnum)[]
+).map((key) => SortDirectionEnum[key]);
+
+export const emptySortingFieldValue = 'no';
 export const successCreateMessage = 'Remix created successfully';
 export const successDeleteMessage = 'Remix deleted successfully';
 export const successUpdateMessage = 'Remix updated successfully';
+
+export const defaultSortingState: ISortColumns = {
+  authorEmail: 'no',
+  description: 'no',
+  name: 'no',
+  price: 'no',
+  trackLength: 'no'
+};

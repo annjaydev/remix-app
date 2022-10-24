@@ -14,7 +14,7 @@ const Header = () => {
 
   const tabs = [
     {
-      value: '/remix-app/',
+      value: '/',
       label: 'Home'
     },
     {

@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
+import { Route, Routes, HashRouter, Navigate } from 'react-router-dom';
 import { FC } from 'react';
 
 import { Home } from '../Home';
@@ -8,19 +8,16 @@ import { NotFound } from '../NotFound';
 import { ScrollToTop } from '@/shared';
 
 const AppRoutes: FC = () => (
-  <BrowserRouter>
+  <HashRouter>
     <ScrollToTop>
       <Routes>
-        <Route path="/" element={<Navigate to="/remix-app" replace />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/remix-app/" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-        </Route>
-        <Route path="/remixes" element={<Layout />}>
-          <Route index element={<Remixes />} />
+          <Route path="remixes" element={<Remixes />} />
         </Route>
       </Routes>
     </ScrollToTop>
-  </BrowserRouter>
+  </HashRouter>
 );
 export default AppRoutes;

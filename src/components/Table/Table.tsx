@@ -14,15 +14,13 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ClearIcon from '@mui/icons-material/Clear';
 
 import { RemixTableProps } from '@/helpers/types';
-import { columns, dataColumns } from '@/helpers/constants';
+import { columns, dataColumns, rowsPerPageSizes } from '@/helpers/constants';
 import styles from './styles';
 import { IRemixModel } from '@/graphql/types/_server';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import { RemixForm } from '../RemixForm';
 
-const Table: FC<RemixTableProps> = (props) => {
-  const { remixes, page, setPage, rowsPerPage, setRowsPerPage } = props;
-
+const Table: FC<RemixTableProps> = ({ remixes, page, setPage, rowsPerPage, setRowsPerPage }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isUpdateFormOpen, setIsUpdateFormOpen] = useState<boolean>(false);
 
@@ -33,9 +31,10 @@ const Table: FC<RemixTableProps> = (props) => {
     meta: { total }
   } = remixes.data.remixes;
 
-  const remixesData: [IRemixModel] = items;
-
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
@@ -53,6 +52,10 @@ const Table: FC<RemixTableProps> = (props) => {
     setIsUpdateFormOpen(true);
     setCurrentRemix(remix);
   };
+
+  const handleCloseDeleteModal = (): void => setIsDeleteModalOpen(false);
+
+  const handleCloseAddForm = (): void => setIsUpdateFormOpen(false);
 
   const getTableRow = (data: IRemixModel) => (
     <TableRow key={data.id}>
@@ -93,12 +96,12 @@ const Table: FC<RemixTableProps> = (props) => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>{remixesData.map((remix) => getTableRow(remix))}</TableBody>
+          <TableBody>{(items as [IRemixModel]).map((remix) => getTableRow(remix))}</TableBody>
         </MuiTable>
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        rowsPerPageOptions={rowsPerPageSizes}
         count={total}
         labelRowsPerPage="Remixes per page"
         rowsPerPage={rowsPerPage}
@@ -108,7 +111,11 @@ const Table: FC<RemixTableProps> = (props) => {
       />
 
       {isDeleteModalOpen && (
-        <DeleteModal id={currentRemix?.id} setOpen={setIsDeleteModalOpen} remixes={remixes} />
+        <DeleteModal
+          id={currentRemix?.id}
+          handleCloseModal={handleCloseDeleteModal}
+          remixes={remixes}
+        />
       )}
 
       {isUpdateFormOpen && (
@@ -116,7 +123,7 @@ const Table: FC<RemixTableProps> = (props) => {
           currentRemix={currentRemix}
           isUpdate
           remixes={remixes}
-          setOpen={setIsUpdateFormOpen}
+          handleCloseForm={handleCloseAddForm}
         />
       )}
     </>

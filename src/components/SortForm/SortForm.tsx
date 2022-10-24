@@ -35,7 +35,7 @@ const SortForm: FC<SortFormProps> = ({ setOpen, setSorting, sorting }) => {
   return (
     <Dialog open PaperProps={{ sx: styles.dialog }} onClose={handleCloseForm}>
       <DialogTitle>
-        <Typography variant="h5">Sorts</Typography>
+        <Typography variant="h5">Sorting</Typography>
       </DialogTitle>
 
       <DialogContent>

@@ -6,7 +6,7 @@ export type ColumnName = 'authorEmail' | 'description' | 'name' | 'price' | 'tra
 export interface DeleteModalProps {
   id: number | undefined;
   remixes: QueryResult<any, OperationVariables>;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleCloseModal: () => void;
 }
 
 export interface RemixTableProps {
@@ -21,7 +21,7 @@ export interface RemixFormProps {
   isUpdate?: boolean;
   remixes: QueryResult<any, OperationVariables>;
   currentRemix?: IRemixModel;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleCloseForm: () => void;
 }
 export interface SortFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;

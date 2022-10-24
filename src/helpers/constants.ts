@@ -17,6 +17,8 @@ export const actionColumns = [
 
 export const columns = [...dataColumns, ...actionColumns];
 
+export const rowsPerPageSizes = [5, 10, 15];
+
 export const sortingFields = [
   { value: 'authorEmail', title: 'Author Email' },
   { value: 'description', title: 'Description' },
@@ -36,11 +38,10 @@ export const sortDirections = (
   Object.keys(SortDirectionEnum) as (keyof typeof SortDirectionEnum)[]
 ).map((key) => SortDirectionEnum[key]);
 
+export const emptySortingFieldValue = 'no';
 export const successCreateMessage = 'Remix created successfully';
 export const successDeleteMessage = 'Remix deleted successfully';
 export const successUpdateMessage = 'Remix updated successfully';
-
-export const emptySortingFieldValue = 'no';
 
 export const defaultSortingState: ISortColumns = {
   authorEmail: 'no',

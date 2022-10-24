@@ -34,32 +34,36 @@ const Remixes = () => {
     variables: payload
   });
 
+  const handleCloseAddForm = (): void => setIsAddFormOpen(false);
+
   return (
     <Box sx={{ ...styles.page }}>
-      <Button onClick={() => setIsAddFormOpen(true)} sx={{ ...styles.addButton }}>
-        Add remix
-      </Button>
-
-      <Button onClick={() => setIsSortFormOpen(true)} sx={{ ...styles.sortButton }}>
-        Set sorting
-      </Button>
-
       {remixes.loading ? (
         <AbsoluteLoading />
       ) : (
-        <Table
-          remixes={remixes}
-          page={page}
-          setPage={setPage}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
-        />
-      )}
+        <>
+          <Button onClick={() => setIsAddFormOpen(true)} sx={{ ...styles.addButton }}>
+            Add remix
+          </Button>
 
-      {isAddFormOpen && <RemixForm remixes={remixes} setOpen={setIsAddFormOpen} />}
+          <Button onClick={() => setIsSortFormOpen(true)} sx={{ ...styles.sortButton }}>
+            Set sorting
+          </Button>
 
-      {isSortFormOpen && (
-        <SortForm setOpen={setIsSortFormOpen} setSorting={setSorting} sorting={sorting} />
+          <Table
+            remixes={remixes}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+          />
+
+          {isAddFormOpen && <RemixForm remixes={remixes} handleCloseForm={handleCloseAddForm} />}
+
+          {isSortFormOpen && (
+            <SortForm setOpen={setIsSortFormOpen} setSorting={setSorting} sorting={sorting} />
+          )}
+        </>
       )}
     </Box>
   );

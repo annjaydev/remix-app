@@ -32,7 +32,12 @@ import {
 import styles from './styles';
 import { remixesGenres, successCreateMessage, successUpdateMessage } from '@/helpers/constants';
 
-const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdate = false }) => {
+const RemixForm: FC<RemixFormProps> = ({
+  remixes,
+  handleCloseForm,
+  currentRemix,
+  isUpdate = false
+}) => {
   const {
     control,
     register,
@@ -62,8 +67,6 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
     return { id: formData.id, ...dirtyFieldsData };
   };
 
-  const handleCloseForm = () => setOpen(false);
-
   const handleMutationResponse = (
     answer: Promise<FetchResult<any, Record<string, any>, Record<string, any>>>
   ): void => {
@@ -81,7 +84,7 @@ const RemixForm: FC<RemixFormProps> = ({ remixes, setOpen, currentRemix, isUpdat
         }
       })
       .catch((err) => enqueueSnackbar(err.errors[0].message, { variant: 'error' }))
-      .finally(() => setOpen(false));
+      .finally(handleCloseForm);
   };
 
   const handleCreateRemix = (data: IRemixCreateDto): void => {
